@@ -1,16 +1,11 @@
-all: snakeos.img snake
-
-snakeos: snake loader
-	cat loader snake > snakeos
+snakeos.img: snake loader
+	cat loader snake > snakeos.img
+	truncate -s 1474560 snakeos.img
 snake: snake.asm
 	nasm snake.asm
 loader: loader.asm
 	nasm loader.asm
-snakeos.img: snakeos
-	floppymaker snakeos snakeos.img
 clean:
-	rm -f snakeos
 	rm -f snakeos.img
 	rm -f loader
 	rm -f snake
-	rm -f os
